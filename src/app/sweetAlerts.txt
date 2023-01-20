@@ -1,0 +1,27 @@
+// this._tostr.success("Success", "Master User");
+    // this._tostr.warning("Warning", "Master User");
+    // this._tostr.error('Error', 'Master User');
+    // this._tostr. info("Info", "Master User"); 
+    //sweetAletr2
+    // Swal.fire('lets create something','sec text','question');
+
+//Cancel Or Recover
+
+    Swal.fire({
+      title:"Are you Sure Want to Delete This Record",
+      text:"Data Will Be Permanently Deleted",
+      icon:"warning",
+      showCancelButton:true,
+      confirmButtonText:"Yes, Delete It",
+      cancelButtonText:"No, Don't delete"
+    }).then((status)=>{
+      if(status.value){
+        Swal.fire("Deleted",
+        "Data Has Been Deleted",
+        "success")
+      }else if(status.dismiss === Swal.DismissReason.cancel){
+        Swal.fire("Not Deleted",
+        "Data Is Safe Now",
+        "error")
+      }
+    })

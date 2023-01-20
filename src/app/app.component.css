@@ -1,0 +1,24 @@
+*{
+    border-radius: 0px;
+    cursor: pointer;
+}
+.fcard{
+    border: 5px solid  rgb(49, 235, 24);
+    margin-bottom: 20px;
+}
+label{
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size: large;
+    font-weight: 700;
+}
+.register{
+    background-color: rgb(49, 235, 24);
+    
+}
+.userList{
+    text-align: center;
+    background-color: rgb(129, 40, 40);
+    color: antiquewhite;
+    font-weight: 600;
+}

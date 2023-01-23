@@ -5,18 +5,24 @@
             <div class="row">
                 <div class="col form-group">
                     <label>Title</label>
-                    <select class="form-control" formControlName="title">
+                    <select class="form-control" formControlName="title" [ngClass] = "{'is-invalid': submitted && f['title'].errors}">
                         <option value="Mr">Mr</option>
                         <option value="Mrs">Mrs</option>
                         <option value="Miss">Miss</option>
                         <option value="Ms">Ms</option>
                     </select>
+                    <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+                        <div *ngIf="f['title'].errors['required']">Title is required !!</div>
+                    </div>
                 </div>
 
                 <div class="form-group col-5">
                     <label>firstName</label>
-                    <input type="text" placeholder="jhon" class="form-control" formControlName="firstName" />
+                    <input type="text" placeholder="jhon" class="form-control" formControlName="firstName"/>
                 </div>
+                <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+                        <div *ngIf="f['title'].errors['required']">Title is required !!</div>
+                    </div>
 
                 <div class="form-group col-6">
                     <label>lastName</label>
@@ -55,7 +61,7 @@
 
             <div class="row">
                 <div class="col form-group text-center">
-                    <button class="btn btn-success me-2">Register</button>
+                    <button class="btn btn-success me-2">{{buttonText}}</button>
                     <button class="btn btn-danger me-2" (click)="onCancel()">Reset</button>
                 </div>
             </div>
@@ -66,6 +72,33 @@
 
 <div class="card">
     <div class="card-header userList">User List :</div>
+    <div class="card-body">
+        <div class="form-row">
+            <div class="form-group col">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Title</th>
+                        <th>firstName</th>
+                        <th>lastName</th> 
+                        <th>DOB</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr *ngFor="let user of users">
+                        <td>{{user.title}}</td>
+                        <td>{{user.firstName}}</td>
+                        <td>{{user.lastName}}</td>
+                        <td>{{user.dob}}</td>
+                        <td>{{user.email}}</td>
+                        <td>
+                            <i class="fa fa-edit" style="color: green;" (click)="Edit(user.id)"></i>
+                            <i class="fa fa-trash" style="color: red;" (click)="Delete(user.id)"></i>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 <router-outlet></router-outlet>

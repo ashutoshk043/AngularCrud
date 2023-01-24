@@ -5,7 +5,8 @@
             <div class="row">
                 <div class="col form-group">
                     <label>Title</label>
-                    <select class="form-control" formControlName="title" [ngClass] = "{'is-invalid': submitted && f['title'].errors}">
+                    <select class="form-control" formControlName="title"
+                        [ngClass]="{'is-invalid': submitted && f['title'].errors}">
                         <option value="Mr">Mr</option>
                         <option value="Mrs">Mrs</option>
                         <option value="Miss">Miss</option>
@@ -18,44 +19,78 @@
 
                 <div class="form-group col-5">
                     <label>firstName</label>
-                    <input type="text" placeholder="jhon" class="form-control" formControlName="firstName"/>
-                </div>
-                <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
-                        <div *ngIf="f['title'].errors['required']">Title is required !!</div>
+                    <input type="text" placeholder="jhon" class="form-control" formControlName="firstName"
+                        [ngClass]="{'is-invalid': submitted && f['firstName'].errors}" />
+                    <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                        <div *ngIf="f['firstName'].errors['required']">firstName is required !!</div>
+                        <div *ngIf="f['firstName'].errors['minlength']">min length should be 3 !!</div>
+                        <div *ngIf="f['firstName'].errors['maxlength']">max length should be 10 !!</div>
                     </div>
+                </div>
 
                 <div class="form-group col-6">
                     <label>lastName</label>
-                    <input type="text" placeholder="pandey" class="form-control" formControlName="lastName" />
+                    <input type="text" placeholder="pandey" class="form-control" formControlName="lastName" 
+                    [ngClass]="{'is-invalid': submitted && f['lastName'].errors}"/>
+                    <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                        <div *ngIf="f['lastName'].errors['required']">lastName is required !!</div>
+                        <div *ngIf="f['lastName'].errors['minlength']">min length should be 3 !!</div>
+                        <div *ngIf="f['lastName'].errors['maxlength']">max length should be 10 !!</div>
+                    </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-6 form-group">
-                    <label>DOB</label>
-                    <input type="date" class="form-control" placeholder="01/01/2023" formControlName="dob" />
+                    <label for="lab">DOB</label>
+                    <input type="date" class="form-control" id="" placeholder="YYYY-MM-DD" formControlName="dob" 
+                    [ngClass]="{'is-invalid': submitted && f['dob'].errors}"/>
+                    <div *ngIf="submitted && f['dob'].errors" class="invalid-feedback">
+                        <div *ngIf="f['dob'].errors['required']">DOB is required !!</div>
+                    </div>
                 </div>
                 <div class="col-6 form-group">
                     <label>Email</label>
-                    <input type="email" class="form-control" placeholder="jhon@something.com" formControlName="email" />
+                    <input type="email" class="form-control" placeholder="jhon@something.com" formControlName="email" 
+                    [ngClass]="{'is-invalid': submitted && f['email'].errors}"/>
+                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                        <div *ngIf="f['email'].errors['required']">email is required !!</div>
+                        <div *ngIf="f['email'].errors['email']">Invalid Email!!</div>
+                        
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6 form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" placeholder="Password" formControlName="password" />
+                    <input type="password" class="form-control" placeholder="Password" formControlName="password" 
+                    [ngClass]="{'is-invalid': submitted && f['password'].errors}"/>
+                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                        <div *ngIf="f['password'].errors['required']">Password is required !!</div>
+                        <div *ngIf="f['password'].errors['minlength']">Password length must be 6 digit!!</div>
+                    </div>
                 </div>
                 <div class="col-6 form-group">
                     <label>Confirm Password</label>
                     <input type="password" class="form-control" placeholder="confirm Password"
-                        formControlName="confirmPassword" />
+                        formControlName="confirmPassword" 
+                        [ngClass]="{'is-invalid': submitted && f['confirmPassword'].errors}"/>
+                        <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
+                            <div *ngIf="f['confirmPassword'].errors['required']">confirmPassword is required !!</div>
+                            <div *ngIf="f['confirmPassword'].errors['minlength']">confirmPassword length must be 6 digit!!</div>
+                            <div *ngIf="f['confirmPassword'].errors['mustMatch']">password && confirmPassword must be same!!</div>
+                        </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-6 form-group">
-                    <input  id= "checkbox" type="checkbox" class="form-check-label" formControlName="acceptTerms" />
+                    <input id="checkbox" type="checkbox" class="form-check-label" formControlName="acceptTerms" 
+                    [ngClass]="{'is-invalid': submitted && f['acceptTerms'].errors}"/>
                     <label for="checkbox"> AcceptTerms & Conditions</label>
+                    <div *ngIf="submitted && f['acceptTerms'].errors" class="invalid-feedback">
+                        <div *ngIf="f['acceptTerms'].errors['required']">acceptTerms is required !!</div>
+                    </div>
                 </div>
             </div>
 
@@ -79,7 +114,7 @@
                     <tr>
                         <th>Title</th>
                         <th>firstName</th>
-                        <th>lastName</th> 
+                        <th>lastName</th>
                         <th>DOB</th>
                         <th>Email</th>
                         <th>Actions</th>

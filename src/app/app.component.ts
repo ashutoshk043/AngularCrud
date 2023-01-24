@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { DBoperation } from './_helpers/db-operations';
+import { mustMatch } from './_helpers/must.matchValidator';
 import { User } from './_helpers/user.interface';
 import { UserService } from './_helpers/user.service';
 
@@ -42,10 +43,38 @@ export class AppComponent implements OnInit {
       dob: ['', Validators.compose([Validators.required, Validators.pattern(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       confirmPassword: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
-      acceptTerms: [false, Validators.required]
-
-    })
+      acceptTerms: [false, Validators.requiredTrue]
+    },
+    {
+      validators : mustMatch('password', 'confirmPassword'),
+    }
+    )
   }
+
+
+  // setFormState() {
+  //   this.buttonText = "Register"
+  //   this.dbops = DBoperation.create;
+
+  //   this.registerForm = new FormGroup({
+  //     id: new FormGroup(0),
+  //     title: new FormGroup('', Validators.required),
+  //     firstName: new FormGroup('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(10)])),
+  //     lastName: new FormGroup('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(10)])),
+  //     email: new FormGroup('', Validators.compose([Validators.email, Validators.required])),
+  //     dob: new FormGroup('', Validators.compose([Validators.required, Validators.pattern(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/)])),
+  //     password: new FormGroup('', Validators.compose([Validators.required, Validators.minLength(6)])),
+  //     confirmPassword: new FormGroup('', Validators.compose([Validators.required, Validators.minLength(6)])),
+  //     acceptTerms: new FormGroup(false, Validators.requiredTrue)
+  //   },
+  //   {
+  //     validators : mustMatch('password', 'confirmPassword'),
+  //   }
+  //   )
+  // }
+
+
+
   //to avoid writing this controls many time using shortform to access data; 
   get f(){
     return this.registerForm.controls;
@@ -100,6 +129,11 @@ export class AppComponent implements OnInit {
 
     let user = this.users.find((u:User)=> u.id === userId);
     this.registerForm.patchValue(user);
+
+
+    this.registerForm.get('password')?.setValue('');
+    this.registerForm.get('confirmPassword')?.setValue('');
+    this.registerForm.get('acceptTerms')?.setValue(false);
   }
 
   Delete(userId: number) {
